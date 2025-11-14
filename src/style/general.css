@@ -1,0 +1,405 @@
+.dashboard-container {
+  /*background: linear-gradient(135deg, #a4d4ff 0%, #4796E6 50%, #3875C5 100%);*/
+  background: white;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Microsoft YaHei", sans-serif;
+  position: relative;
+  overflow: auto;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+     rgba(71, 150, 230, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(71, 150, 230, 0.2) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(120, 198, 198, 0.2) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dashboard-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 统一 placeholder 字体颜色（适用于原生 input/textarea 与 Element Plus 输入控件） */
+:root {
+  /* 覆盖 Element Plus 占位符颜色变量 */
+  --el-text-color-placeholder: rgba(0, 0, 0, 0.6);
+}
+
+/* 原生表单控件 */
+input::placeholder,
+textarea::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+  opacity: 1; /* Firefox */
+}
+input::-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Element Plus 内部输入框（如 el-input、el-date-picker 的输入域） */
+.el-input__inner::placeholder,
+.el-textarea__inner::placeholder,
+.el-range-input::placeholder,
+.el-input__wrapper input::placeholder {
+  color: rgba(0, 0, 0, 0.7) !important;
+  opacity: 1;
+}
+
+/* 日期选择器等灰色禁用态时的占位符稍弱一些 */
+.is-disabled .el-input__inner::placeholder,
+.is-disabled .el-textarea__inner::placeholder,
+.is-disabled .el-range-input::placeholder,
+.el-input.is-disabled .el-input__wrapper input::placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Element Plus 下拉选择器 el-select 的 placeholder（两种渲染节点） */
+.el-select .el-input__inner::placeholder,
+.el-select .el-input__wrapper input::placeholder,
+.el-select .el-select__placeholder {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+.el-select.is-disabled .el-input__inner::placeholder,
+.el-select.is-disabled .el-input__wrapper input::placeholder,
+.el-select.is-disabled .el-select__placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
+}
+
+:deep(.el-table) {
+  background: transparent;
+  color: white;
+  height: 100%;
+  width: 100% !important;
+}
+
+:deep(.el-table__body-wrapper) {
+  background: transparent;
+  flex: 1;
+}
+
+:deep(.el-table tr) {
+  background: transparent;
+}
+
+:deep(.el-table td) {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: transparent;
+  color: #000000;
+  font-weight: bolder;
+  transition: all 0.3s ease;
+}
+
+:deep(.el-table tr:hover td) {
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+:deep(.el-table th) {
+  background: #3875C5 !important;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+:deep(.search-input .el-input__inner) {
+  color: black !important;
+  background: transparent !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  padding: 0 12px !important;
+}
+
+:deep(.search-input .el-input__inner::placeholder) {
+  color: rgba(0, 0, 0, 0.6) !important;
+  font-weight: 400 !important;
+}
+
+/* 申請表單內控件（el-input / el-select / el-date-picker）統一樣式 */
+.application-form :deep(.el-input__wrapper),
+.application-form :deep(.el-select .el-input__wrapper),
+.application-form :deep(.el-date-editor .el-input__wrapper) {
+  min-height: 36px;
+  height: 36px;
+  padding: 0 12px;
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+}
+
+.application-form :deep(.el-input__wrapper:hover),
+.application-form :deep(.el-select .el-input__wrapper:hover),
+.application-form :deep(.el-date-editor .el-input__wrapper:hover) {
+  border-color: rgba(56, 117, 197, 0.4) !important;
+  box-shadow: 0 0 0 2px rgba(56, 117, 197, 0.08) !important;
+}
+
+.application-form :deep(.el-input__wrapper.is-focus),
+.application-form :deep(.el-select .el-input.is-focus .el-input__wrapper),
+.application-form :deep(.el-date-editor .el-input__wrapper.is-focus) {
+  border-color: #3875c5 !important;
+  box-shadow: 0 0 0 2px rgba(56, 117, 197, 0.15) !important;
+}
+
+/* 內部文字與 placeholder */
+.application-form :deep(.el-input__inner),
+.application-form :deep(.el-select .el-input__inner),
+.application-form :deep(.el-date-editor .el-input__inner) {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+.application-form :deep(.el-input__inner::placeholder),
+.application-form :deep(.el-select .el-input__inner::placeholder),
+.application-form :deep(.el-select .el-select__placeholder),
+.application-form :deep(.el-date-editor .el-input__inner::placeholder) {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 前綴/後綴 icon 與下拉箭頭顏色一致 */
+.application-form :deep(.el-input__prefix),
+.application-form :deep(.el-input__suffix),
+.application-form :deep(.el-select .el-select__caret) {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 可清空按鈕一致 */
+.application-form :deep(.el-input__clear) {
+  color: rgba(0, 0, 0, 0.45) !important;
+}
+.application-form :deep(.el-input__clear:hover) {
+  color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* 禁用態統一 */
+.application-form :deep(.el-input.is-disabled .el-input__wrapper),
+.application-form :deep(.el-select.is-disabled .el-input__wrapper),
+.application-form :deep(.el-date-editor.is-disabled .el-input__wrapper) {
+  background: #f6f7fb !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+.application-form :deep(.el-input.is-disabled .el-input__inner),
+.application-form :deep(.el-select.is-disabled .el-input__inner),
+.application-form :deep(.el-date-editor.is-disabled .el-input__inner) {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+
+:deep(.header-actions .el-input__inner) {
+  color: #000000;
+}
+
+:deep(.header-actions .el-input__inner::placeholder) {
+  color: #9ca3af;
+}
+
+/* 搜索框专用样式优化 - 改为白底样式 */
+.search-input {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+:deep(.search-input .el-input__wrapper) {
+  background: #ffffff !important;
+  border: 1px solid #dcdfe6 !important; /* 与 Element Plus 默认风格接近 */
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  backdrop-filter: none !important;
+  transition: all 0.2s ease !important;
+}
+
+:deep(.search-input .el-input__wrapper:hover) {
+  border-color: #c0c4cc !important;
+  background: #ffffff !important;
+}
+
+:deep(.search-input .el-input__wrapper.is-focus) {
+  border-color: #3875c5 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(56, 117, 197, 0.12) !important;
+}
+
+/* 文本与占位符改为深色系，匹配白底 */
+:deep(.search-input .el-input__inner) {
+  color: #000000 !important;
+  background: transparent !important;
+}
+
+:deep(.search-input .el-input__inner::placeholder) {
+  color: #9ca3af !important; /* 中性灰占位符 */
+}
+
+/* 搜索图标样式 - 与白底适配 */
+.search-prepend-icon {
+  color: #6b7280 !important;
+  font-size: 16px !important;
+}
+
+:deep(.search-input .el-input-group__prepend) {
+  background: #ffffff !important;
+  border: 1px solid #dcdfe6 !important;
+  border-right: 1px solid #dcdfe6 !important;
+  color: #6b7280 !important;
+  padding: 0 12px !important;
+  border-radius: 8px 0 0 8px !important;
+  margin-right: 1px !important;
+}
+
+/* 搜索按钮样式 - 简约版 */
+:deep(.search-input .el-input-group__append) {
+  background: #ffffff !important;
+  border: 1px solid #dcdfe6 !important;
+  border-left: 1px solid #dcdfe6 !important;
+  padding: 0 !important;
+  border-radius: 0 8px 8px 0 !important;
+  transition: all 0.2s ease !important;
+  margin-left: 1px !important;
+}
+
+:deep(.search-input .el-input-group__append:hover) {
+  background: #ffffff !important;
+}
+
+:deep(.search-btn.el-button) {
+  background: transparent !important;
+  border: none !important;
+  color: #3875c5 !important;
+  font-weight: 500 !important;
+  padding: 0 30px !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+  font-size: 14px !important;
+  min-width: 60px !important;
+  white-space: nowrap !important;
+}
+
+:deep(.search-btn.el-button:hover) {
+  background: rgba(56, 117, 197, 0.06) !important;
+  color: #245a9f !important;
+}
+
+:deep(.search-btn.el-button.is-loading) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 清除按钮样式 - 简约版 */
+:deep(.search-input .el-input__suffix) {
+  right: 12px !important;
+}
+
+:deep(.search-input .el-input__clear) {
+  color: #c0c4cc !important;
+  font-size: 14px !important;
+  transition: color 0.2s ease !important;
+}
+
+:deep(.search-input .el-input__clear:hover) {
+  color: #909399 !important;
+}
+
+/**
+头 翰林院-品保
+ */
+.header {
+
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  /* background: url("@/assets/图片.png"); */
+  width: 700px;
+  height: 45px;
+  color: #3875c5;
+  padding-top: 12px;
+  font-size: 30px;
+  font-weight: bolder;
+  margin: 0;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.back-section {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.custom-btn,
+.custom-btn.el-button,
+button.custom-btn.el-button {
+  background: linear-gradient(45deg, #3875c5, #3875c5);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 14px;
+  height: 32px;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(30, 58, 138, 0.06);
+  transition: all 0.2s;
+}
+.custom-btn.el-button,
+button.custom-btn.el-button {
+  background: linear-gradient(45deg, #3875c5, #3875c5) !important;
+  border-color: #3875c5 !important;
+  color: #fff !important;
+}
+.custom-btn .el-icon { color: #fff; }
+.custom-btn .el-icon {
+  margin-right: 4px;
+  font-size: 15px;
+}
+.btn-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+

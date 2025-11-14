@@ -1,0 +1,19 @@
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# App runtime data
+uploads/
+exports/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
